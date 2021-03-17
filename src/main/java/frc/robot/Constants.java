@@ -18,6 +18,11 @@ public final class Constants {
     public static final int[] PWM_FEED = {2, 3};
     public static final int PWM_LAUNCH = 4;
     public static final int PWM_PICKUP = 5;
+    public static final int PWM_ARM = 6;
+    public static final int PWM_WHEEL = 7;
+
+    // KONO DIO DA!
+    public static final int[] DIO_ARM = {0, 1};
 
     // Controller
     public static final int CTRL = 0;
@@ -26,4 +31,5 @@ public final class Constants {
     public static final int CTRL_RT = 8;
     public static final int CTRL_LT = 7;
     public static final int CTRL_A = 2;
+    public static final int CTRL_X = 1;
 }

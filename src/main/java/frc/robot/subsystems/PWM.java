@@ -7,14 +7,18 @@ import frc.robot.Constants;
 
 public class PWM extends SubsystemBase {
     
-    private static PWMVictorSPX spx_feed_left, spx_feed_right, spx_launch, spx_pickup;
-    public boolean state_feed, state_launch, state_pickup = false;
+    private static PWMVictorSPX spx_feed_left, spx_feed_right, spx_launch, spx_pickup, spx_arm, spx_wheel;
+    public boolean state_feed = false, state_launch = false, state_pickup = false;
+    public static boolean state_arm = false, state_wheel = false;
 
     public PWM() {
         spx_feed_left = new PWMVictorSPX(Constants.PWM_FEED[0]);
         spx_feed_right = new PWMVictorSPX(Constants.PWM_FEED[1]);
         spx_launch = new PWMVictorSPX(Constants.PWM_LAUNCH);
         spx_pickup = new PWMVictorSPX(Constants.PWM_PICKUP);
+        spx_arm = new PWMVictorSPX(Constants.PWM_ARM);
+        spx_wheel = new PWMVictorSPX(Constants.PWM_WHEEL);
+        SmartDashboard.putBoolean("Arm Active", false);
     }
 
     public void setFeed(boolean b) {
@@ -35,6 +39,22 @@ public class PWM extends SubsystemBase {
         double speed = b ? 0.5 : 0.0;
         spx_pickup.set(speed);
         state_pickup = b;
+    }
+
+    public void setArm() {
+        if (state_arm && !DIO.arm_down.get()) {
+            spx_arm.set(-0.3);
+            SmartDashboard.putBoolean("Arm Active", true);
+        } else if (!state_arm && !DIO.arm_up.get()) {
+            spx_arm.set(0.5);
+            SmartDashboard.putBoolean("Arm Active", true);
+        }
+    }
+
+    public static void stopArm(boolean b) {
+        spx_arm.set(0.0);
+        SmartDashboard.putBoolean("Arm Active", false);
+        state_arm = b;
     }
 
     @Override
