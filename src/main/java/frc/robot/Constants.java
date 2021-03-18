@@ -32,4 +32,5 @@ public final class Constants {
     public static final int CTRL_LT = 7;
     public static final int CTRL_A = 2;
     public static final int CTRL_X = 1;
+    public static final int CTRL_START = 10;
 }

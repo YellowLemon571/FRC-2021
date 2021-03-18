@@ -5,8 +5,7 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -27,7 +26,6 @@ public class Robot extends TimedRobot {
 
   private PWMVictorSPX spx_left, spx_right;
   private DifferentialDrive differentialDrive;
-  private UsbCamera camera;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -44,8 +42,6 @@ public class Robot extends TimedRobot {
     differentialDrive = new DifferentialDrive(spx_left, spx_right);
     SmartDashboard.putNumber("Speed", 0);
     SmartDashboard.putNumber("Rotation", 0);
-
-    camera = CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**

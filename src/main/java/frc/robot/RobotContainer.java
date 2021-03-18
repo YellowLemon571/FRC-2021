@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Arm;
+import frc.robot.commands.Camera;
 import frc.robot.commands.Feed;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Pickup;
+import frc.robot.subsystems.Cameras;
+import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.DIO;
 import frc.robot.subsystems.PWM;
 
@@ -28,11 +31,14 @@ public class RobotContainer {
 
   public static final PWM m_pwm = new PWM();
   public static final DIO m_dio = new DIO();
+  public static final ColorSensor m_colorSensor = new ColorSensor();
+  public static final Cameras m_cameras = new Cameras();
   public final Joystick joystick = new Joystick(Constants.CTRL);
   public final Button btn_rt = new JoystickButton(joystick, Constants.CTRL_RT);
   public final Button btn_lt = new JoystickButton(joystick, Constants.CTRL_LT);
   public final Button btn_a = new JoystickButton(joystick, Constants.CTRL_A);
   public final Button btn_x = new JoystickButton(joystick, Constants.CTRL_X);
+  public final Button btn_start = new JoystickButton(joystick, Constants.CTRL_START);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,6 +60,7 @@ public class RobotContainer {
     btn_a.whenPressed(new Pickup(true));
     btn_a.whenReleased(new Pickup(false));
     btn_x.whenPressed(new Arm());
+    btn_start.whenPressed(new Camera());
   }
 
   /**
