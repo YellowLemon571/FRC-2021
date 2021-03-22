@@ -15,6 +15,7 @@ import frc.robot.commands.Camera;
 import frc.robot.commands.Feed;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Pickup;
+import frc.robot.commands.Wheel;
 import frc.robot.subsystems.Cameras;
 import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.DIO;
@@ -39,6 +40,7 @@ public class RobotContainer {
   public final Button btn_a = new JoystickButton(joystick, Constants.CTRL_A);
   public final Button btn_x = new JoystickButton(joystick, Constants.CTRL_X);
   public final Button btn_start = new JoystickButton(joystick, Constants.CTRL_START);
+  public final Button btn_y = new JoystickButton(joystick, Constants.CTRL_Y);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,6 +63,7 @@ public class RobotContainer {
     btn_a.whenReleased(new Pickup(false));
     btn_x.whenPressed(new Arm());
     btn_start.whenPressed(new Camera());
+    btn_y.whenPressed(new Wheel());
   }
 
   /**
