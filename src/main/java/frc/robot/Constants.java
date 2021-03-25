@@ -25,13 +25,16 @@ public final class Constants {
     public static final int[] DIO_ARM = {0, 1};
 
     // Controller
-    public static final int CTRL = 0;
-    public static final int CTRL_LY = 1;
-    public static final int CTRL_RX = 2;
-    public static final int CTRL_RT = 8;
-    public static final int CTRL_LT = 7;
-    public static final int CTRL_A = 2;
-    public static final int CTRL_X = 1;
-    public static final int CTRL_Y = 4;
-    public static final int CTRL_START = 10;
+    public static final int CTRL_0 = 0;
+    public static final int CTRL_1 = 1;
+    public static final int CTRL0_LY = 1;
+    public static final int CTRL0_RX = 2;
+    public static final int CTRL0_A = 2;
+    public static final int CTRL0_START = 10;
+    public static final int CTRL1_TBL = 3;
+    public static final int CTRL1_TTL = 5;
+    public static final int CTRL1_TBR = 4;
+    public static final int CTRL1_TTR = 6;
+    public static final int CTRL1_TSIDE = 2;
+    public static final int CTRL1_Z = 1;
 }

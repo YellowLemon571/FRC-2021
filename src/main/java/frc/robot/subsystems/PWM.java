@@ -10,6 +10,7 @@ public class PWM extends SubsystemBase {
     private static PWMVictorSPX spx_feed_left, spx_feed_right, spx_launch, spx_pickup, spx_arm, spx_wheel;
     public boolean state_feed = false, state_launch = false, state_pickup = false;
     public static boolean state_arm = false;
+    public double speed_launch = 0.75;
 
     public PWM() {
         spx_feed_left = new PWMVictorSPX(Constants.PWM_FEED[0]);
@@ -19,6 +20,7 @@ public class PWM extends SubsystemBase {
         spx_arm = new PWMVictorSPX(Constants.PWM_ARM);
         spx_wheel = new PWMVictorSPX(Constants.PWM_WHEEL);
         SmartDashboard.putBoolean("Arm Active", false);
+        SmartDashboard.putNumber("Launch Speed", 0.75);
     }
 
     public void setFeed(boolean b) {
@@ -30,7 +32,7 @@ public class PWM extends SubsystemBase {
     }
 
     public void setLaunch(boolean b) {
-        double speed = b ? -1.0 : 0.0;
+        double speed = b ? -speed_launch : 0.0;
         spx_launch.set(speed);
         state_launch = b;
     }

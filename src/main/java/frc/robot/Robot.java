@@ -98,19 +98,20 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    double xSpeed = -m_robotContainer.joystick.getRawAxis(Constants.CTRL_LY) * 0.7;
-    double zRotation = m_robotContainer.joystick.getRawAxis(Constants.CTRL_RX) * 0.5;
-    int pov = m_robotContainer.joystick.getPOV();
-    if (pov == 0) {
+    double xSpeed = -m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_LY) * 0.7;
+    double zRotation = m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_RX) * 0.5;
+    int pov_0 = m_robotContainer.joystick_0.getPOV();
+    int pov_1 = m_robotContainer.joystick_1.getPOV();
+    if (pov_0 == 0 || pov_1 == 0) {
       xSpeed = 0.5;
       zRotation = 0.0;
-    } else if (pov == 90) {
+    } else if (pov_0 == 90 || pov_1 == 90) {
       xSpeed = 0.0;
       zRotation = 0.5;
-    } else if (pov == 180) {
+    } else if (pov_0 == 180 || pov_1 == 180) {
       xSpeed = -0.5;
       zRotation = 0.0;
-    } else if (pov == 270) {
+    } else if (pov_0 == 270 || pov_1 == 270) {
       xSpeed = 0.0;
       zRotation = -0.5;
     }
