@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class PWM extends SubsystemBase {
     
@@ -65,6 +66,9 @@ public class PWM extends SubsystemBase {
 
     @Override
     public void periodic() {
+        double axis = RobotContainer.joystick_1.getRawAxis(Constants.CTRL1_DIAL);
+        speed_launch = (-axis + 1.0) * 0.25 + 0.5;
+        SmartDashboard.putNumber("Launch Speed", speed_launch);
         SmartDashboard.putBoolean("Feed", state_feed);
         SmartDashboard.putBoolean("Launch", state_launch);
         SmartDashboard.putBoolean("Pickup", state_pickup);

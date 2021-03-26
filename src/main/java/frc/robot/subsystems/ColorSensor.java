@@ -25,7 +25,7 @@ public class ColorSensor extends SubsystemBase {
   private final Color kBlueTarget = ColorMatch.makeColor(0.208, 0.471, 0.345);
   public String color_str, game_data, color_required = "", color_start = "", color_previous = "";
   public int proximity, rotations = 0;
-  private boolean active_match = false, active_rotate = false;
+  public boolean active_match = false, active_rotate = false;
 
   public ColorSensor() {
     m_colorMatcher.addColorMatch(kYellowTarget);
@@ -36,7 +36,7 @@ public class ColorSensor extends SubsystemBase {
     SmartDashboard.putNumber("Rotations", rotations);
   }
 
-  private void stopWheel() {
+  public void stopWheel() {
     RobotContainer.m_pwm.setWheel(-0.3);
     Timer timer = new Timer();
     timer.schedule(new TimerTask() {

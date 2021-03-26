@@ -29,12 +29,11 @@ public final class Constants {
     public static final int CTRL_1 = 1;
     public static final int CTRL0_LY = 1;
     public static final int CTRL0_RX = 2;
-    public static final int CTRL0_A = 2;
+    public static final int CTRL0_LB = 5;
     public static final int CTRL0_START = 10;
-    public static final int CTRL1_TBL = 3;
-    public static final int CTRL1_TTL = 5;
     public static final int CTRL1_TBR = 4;
     public static final int CTRL1_TTR = 6;
     public static final int CTRL1_TSIDE = 2;
     public static final int CTRL1_Z = 1;
+    public static final int CTRL1_DIAL = 3;
 }

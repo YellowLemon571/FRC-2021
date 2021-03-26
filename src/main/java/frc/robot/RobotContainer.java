@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AdjustSpeed;
 import frc.robot.commands.Arm;
 import frc.robot.commands.Camera;
 import frc.robot.commands.Feed;
@@ -36,15 +35,13 @@ public class RobotContainer {
   public static final ColorSensor m_colorSensor = new ColorSensor();
   public static final Cameras m_cameras = new Cameras();
   public final Joystick joystick_0 = new Joystick(Constants.CTRL_0);
-  public final Joystick joystick_1 = new Joystick(Constants.CTRL_1);
+  public static final Joystick joystick_1 = new Joystick(Constants.CTRL_1);
   public final Button btn_tside = new JoystickButton(joystick_1, Constants.CTRL1_TSIDE);
   public final Button btn_z = new JoystickButton(joystick_1, Constants.CTRL1_Z);
-  public final Button btn_a = new JoystickButton(joystick_0, Constants.CTRL0_A);
+  public final Button btn_lb = new JoystickButton(joystick_0, Constants.CTRL0_LB);
   public final Button btn_thumbbr = new JoystickButton(joystick_1, Constants.CTRL1_TBR);
   public final Button btn_start = new JoystickButton(joystick_0, Constants.CTRL0_START);
   public final Button btn_thumbtr = new JoystickButton(joystick_1, Constants.CTRL1_TTR);
-  public final Button btn_thumbtl = new JoystickButton(joystick_1, Constants.CTRL1_TTL);
-  public final Button btn_thumbbl = new JoystickButton (joystick_1, Constants.CTRL1_TBL);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -63,13 +60,11 @@ public class RobotContainer {
     btn_z.whenReleased(new Feed(false));
     btn_tside.whenPressed(new Launch(true));
     btn_tside.whenReleased(new Launch(false));
-    btn_a.whenPressed(new Pickup(true));
-    btn_a.whenReleased(new Pickup(false));
+    btn_lb.whenPressed(new Pickup(true));
+    btn_lb.whenReleased(new Pickup(false));
     btn_thumbbr.whenPressed(new Arm());
     btn_start.whenPressed(new Camera());
     btn_thumbtr.whenPressed(new Wheel());
-    btn_thumbtl.whenPressed(new AdjustSpeed(true));
-    btn_thumbbl.whenPressed(new AdjustSpeed(false));
   }
 
   /**
