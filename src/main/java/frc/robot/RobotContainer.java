@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Arm;
+import frc.robot.commands.Autonomous;
 import frc.robot.commands.Camera;
 import frc.robot.commands.Feed;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Pickup;
 import frc.robot.commands.Wheel;
 import frc.robot.subsystems.Cameras;
-import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.DIO;
 import frc.robot.subsystems.PWM;
 
@@ -32,15 +32,17 @@ public class RobotContainer {
 
   public static final PWM m_pwm = new PWM();
   public static final DIO m_dio = new DIO();
-  public static final ColorSensor m_colorSensor = new ColorSensor();
   public static final Cameras m_cameras = new Cameras();
   public final Joystick joystick_0 = new Joystick(Constants.CTRL_0);
   public static final Joystick joystick_1 = new Joystick(Constants.CTRL_1);
   public final Button btn_tside = new JoystickButton(joystick_1, Constants.CTRL1_TSIDE);
   public final Button btn_z = new JoystickButton(joystick_1, Constants.CTRL1_Z);
   public final Button btn_lb = new JoystickButton(joystick_0, Constants.CTRL0_LB);
-  public final Button btn_thumbbr = new JoystickButton(joystick_1, Constants.CTRL1_TBR);
   public final Button btn_start = new JoystickButton(joystick_0, Constants.CTRL0_START);
+  public final Button btn_thumbbr = new JoystickButton(joystick_1, Constants.CTRL1_TBR);
+  public final Button btn_side6 = new JoystickButton(joystick_1, Constants.CTRL1_S6);
+  public final Button btn_side3 = new JoystickButton(joystick_1, Constants.CTRL1_S3);
+  public final Button btn_thumbtl = new JoystickButton(joystick_1, Constants.CTRL1_TTL);
   public final Button btn_thumbtr = new JoystickButton(joystick_1, Constants.CTRL1_TTR);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -58,13 +60,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
     btn_z.whenPressed(new Feed(true));
     btn_z.whenReleased(new Feed(false));
-    btn_tside.whenPressed(new Launch(true));
-    btn_tside.whenReleased(new Launch(false));
+    btn_tside.whenPressed(new Launch("go"));
+    btn_tside.whenReleased(new Launch("stop"));
     btn_lb.whenPressed(new Pickup(true));
     btn_lb.whenReleased(new Pickup(false));
-    btn_thumbbr.whenPressed(new Arm());
     btn_start.whenPressed(new Camera());
-    btn_thumbtr.whenPressed(new Wheel());
+    btn_thumbbr.whenPressed(new Arm());
+    btn_side6.whenPressed(new Launch("unstuck"));
+    btn_thumbtl.whenPressed(new Wheel("reverse"));
+    btn_thumbtl.whenReleased(new Wheel("stop"));
+    btn_thumbtr.whenPressed(new Wheel("forward"));
+    btn_thumbtr.whenReleased(new Wheel("stop"));
   }
 
   /**
@@ -74,6 +80,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new Autonomous();
   }
 }

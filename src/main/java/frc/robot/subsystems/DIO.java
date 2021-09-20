@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class DIO extends SubsystemBase {
 
@@ -18,10 +19,10 @@ public class DIO extends SubsystemBase {
     @Override
     public void periodic() {
         if (arm_up.get() && !state_arm) {
-            PWM.stopArm(true);
+            RobotContainer.m_pwm.stopArm(true);
             state_arm = true;
         } else if (arm_down.get() && state_arm) {
-            PWM.stopArm(false);
+            RobotContainer.m_pwm.stopArm(false);
             state_arm = false;
         }
         SmartDashboard.putString("Arm Position", state_arm ? "Up" : "Down");

@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -10,7 +13,7 @@ public class PWM extends SubsystemBase {
     
     private static PWMVictorSPX spx_feed_left, spx_feed_right, spx_launch, spx_pickup, spx_arm, spx_wheel;
     public boolean state_feed = false, state_launch = false, state_pickup = false;
-    public static boolean state_arm = false;
+    public boolean state_arm = false;
     public double speed_launch = 0.75;
 
     public PWM() {
@@ -32,10 +35,25 @@ public class PWM extends SubsystemBase {
         state_feed = b;
     }
 
-    public void setLaunch(boolean b) {
-        double speed = b ? -speed_launch : 0.0;
-        spx_launch.set(speed);
-        state_launch = b;
+    public void setLaunch(String s) {
+        if (s.equalsIgnoreCase("unstuck")) {
+            spx_launch.set(0.5);
+            spx_feed_left.set(0.2);
+            spx_feed_right.set(-0.75);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    spx_launch.set(0.0);
+                    spx_feed_left.set(0.0);
+                    spx_feed_right.set(0.0);
+                }
+            }, 500);
+        } else {
+            double speed = (s.equalsIgnoreCase("go")) ? -speed_launch : 0.0;
+            spx_launch.set(speed);
+            state_launch = s.equalsIgnoreCase("go");
+        }
     }
 
     public void setPickup(boolean b) {
@@ -54,7 +72,7 @@ public class PWM extends SubsystemBase {
         }
     }
 
-    public static void stopArm(boolean b) {
+    public void stopArm(boolean b) {
         spx_arm.set(0.0);
         SmartDashboard.putBoolean("Arm Active", false);
         state_arm = b;

@@ -5,17 +5,17 @@ import frc.robot.RobotContainer;
 
 public class Launch extends CommandBase {
     
-    private boolean b;
+    private String s;
 
-    public Launch(boolean b) {
+    public Launch(String s) {
         addRequirements(RobotContainer.m_pwm);
-        this.b = b;
+        this.s = s;
     }
 
     @Override
     public void initialize() {
-        if (!b && RobotContainer.m_pwm.state_feed) RobotContainer.m_pwm.setFeed(false);
-        RobotContainer.m_pwm.setLaunch(b);
+        if (s.equalsIgnoreCase("stop") && RobotContainer.m_pwm.state_feed) RobotContainer.m_pwm.setFeed(false);
+        RobotContainer.m_pwm.setLaunch(s);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private PWMVictorSPX spx_left, spx_right;
-  private DifferentialDrive differentialDrive;
+  public static DifferentialDrive differentialDrive;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -98,22 +98,22 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    double xSpeed = -m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_LY) * 0.7;
-    double zRotation = m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_RX) * 0.6 ;
+    double xSpeed = -m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_LY);
+    double zRotation = m_robotContainer.joystick_0.getRawAxis(Constants.CTRL0_RX) * (xSpeed > 0.2 || xSpeed < -0.2 ? 1.0 : 0.75) ;
     int pov_0 = m_robotContainer.joystick_0.getPOV();
     int pov_1 = RobotContainer.joystick_1.getPOV();
     if (pov_0 == 0 || pov_1 == 180) {
-      xSpeed = 0.5;
+      xSpeed = 0.75;
       zRotation = 0.0;
     } else if (pov_0 == 90 || pov_1 == 90) {
       xSpeed = 0.0;
-      zRotation = 0.5;
+      zRotation = 0.75;
     } else if (pov_0 == 180 || pov_1 == 0) {
-      xSpeed = -0.5;
+      xSpeed = -0.75;
       zRotation = 0.0;
     } else if (pov_0 == 270 || pov_1 == 270) {
       xSpeed = 0.0;
-      zRotation = -0.5;
+      zRotation = -0.75;
     }
     differentialDrive.arcadeDrive(xSpeed, zRotation);
     SmartDashboard.putNumber("Speed", xSpeed);
